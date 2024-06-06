@@ -18,29 +18,45 @@ function firstLoad() {
 
 function update() {
   if (Number(localStorage.money) < 1000000) {
-    document.getElementById("money-label").innerHTML = "Money: $" + localStorage.money
-    document.getElementById("stocks-owned-label").innerHTML = "Stocks owned: " + localStorage.stocksOwned
-    document.getElementById("stock-price-label").innerHTML = "Stock price: $" + localStorage.stockPrice
+    document.getElementById("money-label").innerHTML =
+      "Money: $" + localStorage.money
+    document.getElementById("stocks-owned-label").innerHTML =
+      "Stocks owned: " + localStorage.stocksOwned
+    document.getElementById("stock-price-label").innerHTML =
+      "Stock price: $" + localStorage.stockPrice
     document.getElementById("day-label").innerHTML = "Day: " + localStorage.day
   } else {
-      document.getElementById("title-label").innerHTML = "You Win! Day: " +localStorage.day + ". To start over, delete site data."
+    document.getElementById("title-label").innerHTML =
+      "You Win! Day: " + localStorage.day + ". To start over, delete site data."
 
-      document.getElementById("money-label").innerHTML = ""
-      document.getElementById("stocks-owned-label").innerHTML = ""
-      document.getElementById("stock-price-label").innerHTML = ""
-      document.getElementById("day-label").innerHTML = ""
+    document.getElementById("money-label").innerHTML = ""
+    document.getElementById("stocks-owned-label").innerHTML = ""
+    document.getElementById("stock-price-label").innerHTML = ""
+    document.getElementById("day-label").innerHTML = ""
 
-      document.getElementById("form-label").innerHTML = ""
+    document.getElementById("form-label").innerHTML = ""
   }
 }
 
 function enterClicked() {
-  let stocksSoldOrBought = parseInt(document.getElementById("stocks-sold-or-bought").value)
+  let stocksSoldOrBought = parseInt(
+    document.getElementById("stocks-sold-or-bought").value
+  )
   let moneyDifference = stocksSoldOrBought * Number(localStorage.stockPrice)
-  if (moneyDifference <= Number(localStorage.money) && stocksSoldOrBought >= -1 * Number(localStorage.stocksOwned)) {
-    localStorage.money = (Number(localStorage.money) - moneyDifference).toFixed(2)
-    localStorage.stocksOwned = Number(localStorage.stocksOwned) + stocksSoldOrBought
-    localStorage.stockPrice = (Number(localStorage.stockPrice) + Math.random() * 2 - 1).toFixed(2)
+  if (
+    moneyDifference <= Number(localStorage.money) &&
+    stocksSoldOrBought >= -1 * Number(localStorage.stocksOwned)
+  ) {
+    localStorage.money = (Number(localStorage.money) - moneyDifference).toFixed(
+      2
+    )
+    localStorage.stocksOwned =
+      Number(localStorage.stocksOwned) + stocksSoldOrBought
+    localStorage.stockPrice = (
+      Number(localStorage.stockPrice) +
+      Math.random() * 2 -
+      1
+    ).toFixed(2)
     if (Number(localStorage.stockPrice) < 5) {
       localStorage.stockPrice = (5 + Math.random()).toFixed(2)
     } else if (Number(localStorage.stockPrice) > 15) {
