@@ -27,44 +27,82 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title"><strong>-S u p e r ---- S t o c k ---- S i m u l a t o r-</strong></span>
+          <span class="mdl-layout-title"
+            ><strong
+              >-S u p e r ---- S t o c k ---- S i m u l a t o r-</strong
+            ></span
+          >
         </div>
       </header>
       <br />
       <main class="mdl-layout__content">
         <div class="right-image">
-          <img src="./images/download (1).jpeg" alt="stock market" width="250" />
+          <img
+            src="./images/download (1).jpeg"
+            alt="stock market"
+            width="250"
+          />
         </div>
-        <div class="page-content"; id="title-label"><h1 style="font-family: 'Courier New', Courier, monospace; font-size: 12pt;"><strong><em>Welcome to the stock market. The goal is to get to
-          $1,000,000 (liquid).</strong></em></h1></div>
-        <div class="page-content"; id="money-label">Money: $0</div>
+        <div class="page-content" ; id="title-label">
+          <h1
+            style="
+              font-family: 'Courier New', Courier, monospace;
+              font-size: 12pt;
+            "
+          >
+            <strong
+              ><em
+                >Welcome to the stock market. The goal is to get to $1,000,000
+                (liquid).</em
+              ></strong
+            >
+          </h1>
+        </div>
+        <div class="page-content" ; id="money-label">Money: $0</div>
         <br />
-        <div class="page-content"; id="stocks-owned-label">Stocks owned: 0</div>
+        <div class="page-content" ; id="stocks-owned-label">
+          Stocks owned: 0
+        </div>
         <br />
-        <div class="page-content"; id="stock-price-label">Stocks price: $0</div>
+        <div class="page-content" ; id="stock-price-label">
+          Stocks price: $0
+        </div>
         <br />
-        <div class="page-content"; id="day-label">Day: 0</div>
+        <div class="page-content" ; id="day-label">Day: 0</div>
         <br />
-        <form action="#"; id="form-label">
+        <form action="#" ; id="form-label">
           <p>Stocks to buy/sell today (positive/negative number):</p>
           <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="stocks-sold-or-bought">
-            <label class="mdl-textfield__label" for="stocks-sold-or-bought-entered">enter...</label>
+            <input
+              class="mdl-textfield__input"
+              type="text"
+              pattern="-?[0-9]*(\.[0-9]+)?"
+              id="stocks-sold-or-bought"
+            />
+            <label
+              class="mdl-textfield__label"
+              for="stocks-sold-or-bought-entered"
+              >enter...</label
+            >
             <span class="mdl-textfield__error">Input is not a number!</span>
           </div>
           <br />
           <!-- Accent-colored raised button with ripple -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-            onclick="enterClicked()">
+          <button
+            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+            onclick="enterClicked()"
+          >
             Enter
           </button>
         </form>
         <br />
-        <div class="page-content"; id="message-label"></div>
-        <br/><br /><br /><br /><br />
-        <div class="page-content"; id="reset-button-label"></div>
+        <div class="page-content" ; id="message-label"></div>
+        <br /><br /><br /><br /><br />
+        <div class="page-content" ; id="reset-button-label"></div>
         <br /><br /><br />
-        <div class="page-content"><p style="font-size: 8pt;">Created by: Pablo Fiallos.</p></div>
+        <div class="page-content">
+          <p style="font-size: 8pt">Created by: Pablo Fiallos.</p>
+        </div>
       </main>
     </div>
   </body>

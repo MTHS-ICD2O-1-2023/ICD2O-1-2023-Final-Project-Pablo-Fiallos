@@ -26,7 +26,6 @@ function update() {
       "Stock price: $" + localStorage.stockPrice
     document.getElementById("day-label").innerHTML = "Day: " + localStorage.day
   } else {
-
     document.getElementById("money-label").innerHTML = ""
     document.getElementById("stocks-owned-label").innerHTML = ""
     document.getElementById("stock-price-label").innerHTML = ""
@@ -53,8 +52,14 @@ function update() {
     } else {
       score = "C-"
     }
-    document.getElementById("message-label").innerHTML = "You Win! Day: " + localStorage.day + ". Your score is: "+score+". Thank you so much for playing. Click the reset button to reset."
-    document.getElementById("reset-button-label").innerHTML ="<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" onclick=\"resetClicked()\">Reset</button>"
+    document.getElementById("message-label").innerHTML =
+      "You Win! Day: " +
+      localStorage.day +
+      ". Your score is: " +
+      score +
+      ". Thank you so much for playing. Click the reset button to reset."
+    document.getElementById("reset-button-label").innerHTML =
+      '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button>'
   }
 }
 
