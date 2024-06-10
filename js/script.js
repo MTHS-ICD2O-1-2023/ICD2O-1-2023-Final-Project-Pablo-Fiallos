@@ -26,8 +26,6 @@ function update() {
       "Stock price: $" + localStorage.stockPrice
     document.getElementById("day-label").innerHTML = "Day: " + localStorage.day
   } else {
-    document.getElementById("title-label").innerHTML =
-      "You Win! Day: " + localStorage.day + ". To start over, delete site data."
 
     document.getElementById("money-label").innerHTML = ""
     document.getElementById("stocks-owned-label").innerHTML = ""
@@ -35,6 +33,28 @@ function update() {
     document.getElementById("day-label").innerHTML = ""
 
     document.getElementById("form-label").innerHTML = ""
+    let score = "error"
+    if (Number(localStorage.day) <= 1000) {
+      score = "A+"
+    } else if (Number(localStorage.day) <= 2000) {
+      score = "A"
+    } else if (Number(localStorage.day) <= 3000) {
+      score = "A-"
+    } else if (Number(localStorage.day) <= 4000) {
+      score = "B+"
+    } else if (Number(localStorage.day) <= 5000) {
+      score = "B"
+    } else if (Number(localStorage.day) <= 6000) {
+      score = "B-"
+    } else if (Number(localStorage.day) <= 7000) {
+      score = "C+"
+    } else if (Number(localStorage.day) <= 8000) {
+      score = "C"
+    } else {
+      score = "C-"
+    }
+    document.getElementById("message-label").innerHTML = "You Win! Day: " + localStorage.day + ". Your score is: "+score+". Thank you so much for playing. Click the reset button to reset."
+    document.getElementById("reset-button-label").innerHTML ="<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" onclick=\"resetClicked()\">Reset</button>"
   }
 }
 
@@ -64,12 +84,20 @@ function enterClicked() {
       localStorage.stockPrice = (15 - Math.random()).toFixed(2)
     }
     localStorage.day = Number(localStorage.day) + 1
-    update()
     sendMessage()
+    update()
   } else {
     document.getElementById("message-label").innerHTML =
       "Impossible transaction. Try again."
   }
+}
+
+function resetClicked() {
+  localStorage.money = 1000
+  localStorage.stocksOwned = 0
+  localStorage.stockPrice = 10
+  localStorage.day = 0
+  location.reload()
 }
 
 function sendMessage() {
