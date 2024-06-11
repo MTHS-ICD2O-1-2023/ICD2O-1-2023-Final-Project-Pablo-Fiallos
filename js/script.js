@@ -12,6 +12,15 @@ function firstLoad() {
     localStorage.stocksOwned = 0
     localStorage.stockPrice = 10
     localStorage.day = 0
+    localStorage.scores = []
+  }
+  for (let index = 0; index < localStorage.scores.length; index++) {
+    document.getElementById(localStorage.scores[index] + "-image").innerHTML =
+      '<img src="./images/' +
+      localStorage.scores[index] +
+      '.svg" alt="' +
+      localStorage.scores[index] +
+      '" width="50"/>'
   }
   update()
 }
@@ -60,6 +69,9 @@ function update() {
       ". Thank you so much for playing. Click the reset button to reset."
     document.getElementById("reset-button-label").innerHTML =
       '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button>'
+    if (!localStorage.scores.includes(score)) {
+      localStorage.scores.push(score)
+    }
   }
 }
 
