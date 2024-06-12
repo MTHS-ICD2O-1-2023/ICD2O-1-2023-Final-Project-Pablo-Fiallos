@@ -12,6 +12,26 @@ function firstLoad() {
     localStorage.stocksOwned = 0
     localStorage.stockPrice = 10
     localStorage.day = 0
+    localStorage.scores = []
+  } else if (localStorage.money < 1000000) {
+    for (
+      let index = 1;
+      index < localStorage.scores.split(",").length;
+      index++
+    ) {
+      try {
+        document.getElementById(
+          localStorage.scores.split(",")[index] + "-image"
+        ).innerHTML =
+          '<img src="./images/' +
+          localStorage.scores.split(",")[index] +
+          '.svg" alt="' +
+          localStorage.scores.split(",")[index] +
+          '" width="50"/>'
+      } catch {
+        console.log("error")
+      }
+    }
   }
   update()
 }
@@ -26,40 +46,47 @@ function update() {
       "Stock price: $" + localStorage.stockPrice
     document.getElementById("day-label").innerHTML = "Day: " + localStorage.day
   } else {
-    document.getElementById("money-label").innerHTML = ""
-    document.getElementById("stocks-owned-label").innerHTML = ""
-    document.getElementById("stock-price-label").innerHTML = ""
-    document.getElementById("day-label").innerHTML = ""
+    userWins()
+  }
+}
 
-    document.getElementById("form-label").innerHTML = ""
-    let score = "error"
-    if (Number(localStorage.day) <= 1000) {
-      score = "A+"
-    } else if (Number(localStorage.day) <= 2000) {
-      score = "A"
-    } else if (Number(localStorage.day) <= 3000) {
-      score = "A-"
-    } else if (Number(localStorage.day) <= 4000) {
-      score = "B+"
-    } else if (Number(localStorage.day) <= 5000) {
-      score = "B"
-    } else if (Number(localStorage.day) <= 6000) {
-      score = "B-"
-    } else if (Number(localStorage.day) <= 7000) {
-      score = "C+"
-    } else if (Number(localStorage.day) <= 8000) {
-      score = "C"
-    } else {
-      score = "C-"
-    }
-    document.getElementById("message-label").innerHTML =
-      "You Win! Day: " +
-      localStorage.day +
-      ". Your score is: " +
-      score +
-      ". Thank you so much for playing. Click the reset button to reset."
-    document.getElementById("reset-button-label").innerHTML =
-      '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button>'
+function userWins() {
+  document.getElementById("money-label").innerHTML = ""
+  document.getElementById("stocks-owned-label").innerHTML = ""
+  document.getElementById("stock-price-label").innerHTML = ""
+  document.getElementById("day-label").innerHTML = ""
+
+  document.getElementById("form-label").innerHTML = ""
+  globalThis.score = ""
+  if (Number(localStorage.day) <= 1000) {
+    score = "A+"
+  } else if (Number(localStorage.day) <= 2000) {
+    score = "A"
+  } else if (Number(localStorage.day) <= 3000) {
+    score = "A-"
+  } else if (Number(localStorage.day) <= 4000) {
+    score = "B+"
+  } else if (Number(localStorage.day) <= 5000) {
+    score = "B"
+  } else if (Number(localStorage.day) <= 6000) {
+    score = "B-"
+  } else if (Number(localStorage.day) <= 7000) {
+    score = "C+"
+  } else if (Number(localStorage.day) <= 8000) {
+    score = "C"
+  } else {
+    score = "C-"
+  }
+  document.getElementById("message-label").innerHTML =
+    "You Win! Day: " +
+    localStorage.day +
+    ". Your score is: " +
+    score +
+    ". Thank you so much for playing. Click the reset button to reset."
+  document.getElementById("reset-button-label").innerHTML =
+    '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button>'
+  if (!localStorage.scores.split(",").includes(score)) {
+    localStorage.scores = localStorage.scores.split(",").concat([score])
   }
 }
 
