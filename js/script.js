@@ -82,9 +82,9 @@ function userWins() {
     localStorage.day +
     ". Your score is: " +
     score +
-    ". Thank you so much for playing. Click the reset button to reset."
+    ". Thank you so much for playing. Click the reset button to reset. <br/><br/><br/><br/><br/><br/><br/>"
   document.getElementById("reset-button-label").innerHTML =
-    '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button>'
+    '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button><br/><br/><br/><br/><br/><br/><br/>'
   if (!localStorage.scores.split(",").includes(score)) {
     localStorage.scores = localStorage.scores.split(",").concat([score])
   }
