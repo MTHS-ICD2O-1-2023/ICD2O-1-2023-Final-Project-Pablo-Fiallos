@@ -13,7 +13,8 @@ function firstLoad() {
     localStorage.stockPrice = 10
     localStorage.day = 0
     localStorage.scores = []
-  } else if (localStorage.money < 1000000) {
+    localStorage.hardMode = false
+  } else {
     for (
       let index = 1;
       index < localStorage.scores.split(",").length;
@@ -33,6 +34,7 @@ function firstLoad() {
       }
     }
   }
+  globalThis.hardModeBool = localStorage.hardMode === "true"
   update()
 }
 
@@ -58,25 +60,37 @@ function userWins() {
 
   document.getElementById("form-label").innerHTML = ""
   globalThis.score = ""
-  if (Number(localStorage.day) <= 1000) {
-    score = "A+"
-  } else if (Number(localStorage.day) <= 2000) {
-    score = "A"
-  } else if (Number(localStorage.day) <= 3000) {
-    score = "A-"
-  } else if (Number(localStorage.day) <= 4000) {
-    score = "B+"
-  } else if (Number(localStorage.day) <= 5000) {
-    score = "B"
-  } else if (Number(localStorage.day) <= 6000) {
-    score = "B-"
-  } else if (Number(localStorage.day) <= 7000) {
-    score = "C+"
-  } else if (Number(localStorage.day) <= 8000) {
-    score = "C"
+  if (!hardModeBool) {
+    if (Number(localStorage.day) <= 1000) {
+      score = "A+"
+    } else if (Number(localStorage.day) <= 2000) {
+      score = "A"
+    } else if (Number(localStorage.day) <= 3000) {
+      score = "A-"
+    } else if (Number(localStorage.day) <= 4000) {
+      score = "B+"
+    } else if (Number(localStorage.day) <= 5000) {
+      score = "B"
+    } else if (Number(localStorage.day) <= 6000) {
+      score = "B-"
+    } else if (Number(localStorage.day) <= 7000) {
+      score = "C+"
+    } else if (Number(localStorage.day) <= 8000) {
+      score = "C"
+    } else {
+      score = "C-"
+    }
   } else {
-    score = "C-"
+    if (!localStorage.scores.split(",").includes("gold")) {
+      localStorage.scores = localStorage.scores.split(",").concat(["gold"])
+    }
+    hardModeToggle()
+    document.getElementById("title-label").innerHTML = ""
+    document.getElementById("message-label").innerHTML =
+      "<strong>Jesus...</strong>"
+    return
   }
+
   document.getElementById("message-label").innerHTML =
     "You Win! Day: " +
     localStorage.day +
@@ -94,6 +108,11 @@ function enterClicked() {
   let stocksSoldOrBought = parseInt(
     document.getElementById("stocks-sold-or-bought").value
   )
+  if (stocksSoldOrBought == -58947362) {
+    hardModeToggle()
+    return
+  }
+
   let moneyDifference = stocksSoldOrBought * Number(localStorage.stockPrice)
   if (
     moneyDifference <= Number(localStorage.money) &&
@@ -116,7 +135,18 @@ function enterClicked() {
       localStorage.stockPrice = (15 - Math.random()).toFixed(2)
     }
     localStorage.day = Number(localStorage.day) + 1
-    sendMessage()
+    if (hardModeBool) {
+      localStorage.money = (Number(localStorage.money) * 0.9).toFixed(2)
+      if (
+        Number(localStorage.money) < 5 &&
+        Number(localStorage.stocksOwned) == 0
+      ) {
+        hardModeToggle()
+        return
+      }
+    } else {
+      sendMessage()
+    }
     update()
   } else {
     document.getElementById("message-label").innerHTML =
@@ -130,6 +160,27 @@ function resetClicked() {
   localStorage.stockPrice = 10
   localStorage.day = 0
   location.reload()
+}
+
+function hardModeToggle() {
+  console.log("hard mode")
+  localStorage.hardMode = !hardModeBool
+  localStorage.money = 1000
+  localStorage.stocksOwned = 0
+  localStorage.stockPrice = 10
+  localStorage.day = 0
+  document.getElementById("reset-button-label").innerHTML =
+    '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button><br/><br/><br/><br/><br/><br/><br/>'
+  if (localStorage.hardMode === "true") {
+    document.getElementById("message-label").innerHTML =
+      "<strong>You've made a grave mistake.</strong>"
+    document.getElementById("money-label").innerHTML = ""
+    document.getElementById("stocks-owned-label").innerHTML = ""
+    document.getElementById("stock-price-label").innerHTML = ""
+    document.getElementById("day-label").innerHTML = ""
+    document.getElementById("title-label").innerHTML = ""
+  }
+  document.getElementById("form-label").innerHTML = ""
 }
 
 function sendMessage() {
