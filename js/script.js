@@ -35,6 +35,10 @@ function firstLoad() {
     }
   }
   globalThis.hardModeBool = localStorage.hardMode === "true"
+  if (localStorage.trueEnd === "true") {
+    document.getElementById("message-label").innerHTML = "PFG"
+    localStorage.trueEnd = false
+  }
   update()
 }
 
@@ -61,7 +65,7 @@ function userWins() {
   document.getElementById("form-label").innerHTML = ""
   globalThis.score = ""
   if (!hardModeBool) {
-    if (Number(localStorage.day) <= 1000) {
+    if (Number(localStorage.day) <= 1400) {
       score = "A+"
     } else if (Number(localStorage.day) <= 2000) {
       score = "A"
@@ -90,7 +94,6 @@ function userWins() {
       "<strong>Jesus...</strong>"
     return
   }
-
   document.getElementById("message-label").innerHTML =
     "You Win! Day: " +
     localStorage.day +
@@ -136,7 +139,7 @@ function enterClicked() {
     }
     localStorage.day = Number(localStorage.day) + 1
     if (hardModeBool) {
-      localStorage.money = (Number(localStorage.money) * 0.9).toFixed(2)
+      localStorage.money = (Number(localStorage.money) * 0.997).toFixed(2)
       if (
         Number(localStorage.money) < 5 &&
         Number(localStorage.stocksOwned) == 0
@@ -159,6 +162,13 @@ function resetClicked() {
   localStorage.stocksOwned = 0
   localStorage.stockPrice = 10
   localStorage.day = 0
+  if (
+    localStorage.scores.split(",").length >= 11 &&
+    !localStorage.trueEndShown
+  ) {
+    localStorage.trueEnd = true
+    localStorage.trueEndShown = true
+  }
   location.reload()
 }
 
@@ -271,5 +281,9 @@ function sendMessage() {
   ) {
     document.getElementById("message-label").innerHTML =
       "just a shower thought..."
+  }
+  if (Math.floor(Math.random() * 5000) == 4999) {
+    document.getElementById("message-label").innerHTML =
+      "tip: type in -58947362 and click enter. actually don't do that. please don't do that."
   }
 }
