@@ -65,9 +65,9 @@ function userWins() {
   document.getElementById("form-label").innerHTML = ""
   globalThis.score = ""
   if (!hardModeBool) {
-    if (Number(localStorage.day) <= 1400) {
+    if (Number(localStorage.day) <= 2500) {
       score = "A+"
-    } else if (Number(localStorage.day) <= 2000) {
+    } else if (Number(localStorage.day) <= 2700) {
       score = "A"
     } else if (Number(localStorage.day) <= 3000) {
       score = "A-"
@@ -113,6 +113,11 @@ function enterClicked() {
   )
   if (stocksSoldOrBought == -58947362) {
     hardModeToggle()
+    return
+  } else if (stocksSoldOrBought == -73537308) {
+    document.getElementById("reset-button-label").innerHTML =
+      '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="resetClicked()">Reset</button><br/><br/><br/><br/><br/><br/><br/>'
+    document.getElementById("form-label").innerHTML = ""
     return
   }
 
@@ -281,9 +286,45 @@ function sendMessage() {
   ) {
     document.getElementById("message-label").innerHTML =
       "just a shower thought..."
-  }
-  if (Math.floor(Math.random() * 5000) == 4999) {
+  } else if (
+    Number(localStorage.day) >= 2600 &&
+    Number(localStorage.day) <= 2610
+  ) {
     document.getElementById("message-label").innerHTML =
-      "tip: type in -58947362 and click enter. actually don't do that. please don't do that."
+      "tip: type in -73537308 to restart from day 0"
+  } else if (
+    Number(localStorage.day) >= 3600 &&
+    Number(localStorage.day) <= 3601
+  ) {
+    document.getElementById("message-label").innerHTML =
+      "tip: type in -58947362 and click enter =). actually don't do that. please don't do that."
   }
+}
+
+function crunchOdds(days) {
+  let success = 0
+  let doubles = 0
+  for (let index = 0; index <= 10000; index++) {
+    let number = 10.0
+    let goingUp = false
+    doubles = 0
+    for (let index = 0; index <= days; index++) {
+      number = Number(number) + Number((Math.random() * 2 - 1).toFixed(2))
+      if (Number(number) < 5) {
+        number = (5 + Math.random()).toFixed(2)
+      } else if (Number(number) > 15) {
+        number = (15 - Math.random()).toFixed(2)
+      }
+      if (Number(number) <= 6.66 && goingUp == false) {
+        goingUp = true
+      } else if (Number(number) >= 13.33 && goingUp == true) {
+        doubles += 1
+        goingUp = false
+      }
+    }
+    if (doubles >= 10) {
+      success = Number(success) + 1
+    }
+  }
+  console.log(success)
 }
